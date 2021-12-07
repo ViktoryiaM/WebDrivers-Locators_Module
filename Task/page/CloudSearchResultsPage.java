@@ -8,22 +8,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class CloudHomePage {
+public class CloudSearchResultsPage {
   private WebDriver driver;
 
-  public CloudHomePage(WebDriver driver) {
+  public CloudSearchResultsPage(WebDriver driver) {
     this.driver = driver;
   }
 
-  public CloudHomePage openPage() {
-    driver.get("https://cloud.google.com/");
-    return this;
-  }
-
-  public CloudSearchResultsPage search(String searchTerm) {
-    this.waitTillElementUpload(10, By.name("q"));
-    this.getElement(By.name("q")).sendKeys(searchTerm + "\n");
-    return new CloudSearchResultsPage(driver);
+  public CloudComputeEnginePage openComputeEnginePage(){
+    this.waitTillElementUpload(10, By.xpath("//b[text()='Google Cloud Platform Pricing Calculator']/parent::a"));
+    this.getElement(By.xpath("//b[text()='Google Cloud Platform Pricing Calculator']/parent::a")).click();
+    return new CloudComputeEnginePage(driver);
   }
 
   private void waitTillElementUpload(int seconds, By by) {
